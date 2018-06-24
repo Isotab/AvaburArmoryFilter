@@ -57,7 +57,7 @@
 
     function setupWatches(){
         $("#armoryFilterButton").on("click", function(){
-            filterArmory(type.val(), item.val(), level.val());
+            filterArmory(typeSelect.val(), item.val(), level.val());
         });
 
         $("<select> #type").on("select", function(event){
