@@ -62,6 +62,7 @@
     };
 
     function filterArmory(type, item, level){
+        console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
         //get table contents
         //hide rows that don't meet criteria
     }
