@@ -12,16 +12,21 @@
 
 (function($) {
     'use strict';
+    var filterDiv;
+    var typeSelect;
+    var item;
+    var level;
+    var filterButton;
 
     function createTypeSelect(){
         var type = $("<div>").attr("id", "armoryFilter");
-        var typeSelect = $("<select>").attr("id", "type");
+        typeSelect = $("<select>").attr("id", "type");
         typeSelect.append("<option value=''>--Type--</option>");
         typeSelect.append("<option value='weapon'>Weapons</option>");
         typeSelect.append("<option value='armor'>Armor</option>");
         type.append(typeSelect);
 
-        var item = $("<select>").attr("id", "item");
+        item = $("<select>").attr("id", "item");
         item.append("<option value=''>--Item--</option>");
         item.append("<option value='sword' class='wep'>Swords</option>");
         item.append("<option value='bow' class='wep'>Bows</option>");
@@ -34,16 +39,16 @@
         item.append("<option value='quiver' class='arm'>Quivers</option>");
         type.append(item);
 
-        var level = $("<input placeholder='Level' type='number'/>").attr("id", "level");
+        level = $("<input placeholder='Level' type='number'/>").attr("id", "level");
         type.append(level);
 
-        var button = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton");
-        type.append(button);
+        filterButton = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton");
+        type.append(filterButton);
         return type;
     }
 
     function insertHtml(){
-        var filterDiv = $("<div>").attr("id","armoryFilter");
+        filterDiv = $("<div>").attr("id","armoryFilter");
         filterDiv.append(createTypeSelect());
         var clanArmoryTable = $("#clanInventoryTable_filter");
         clanArmoryTable.after(filterDiv);
@@ -51,12 +56,20 @@
     };
 
     function setupWatches(){
-
+        $("#armoryFilterButton").on("click", function(){
+            filterArmory(type.val(), item.val(), level.val());
+        });
     };
+
+    function filterArmory(type, item, level){
+        //get table contents
+        //hide rows that don't meet criteria
+    }
 
     function init() {
         console.log("In init()");
         insertHtml();
+        setupWatches();
     };
 
     window.addEventListener('load', init, {once: true});
