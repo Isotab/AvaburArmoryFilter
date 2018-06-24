@@ -35,7 +35,7 @@
         item.append("<option value='plate' class='arm'>Breastplates</option>");
         item.append("<option value='glove' class='arm'>Gloves</option>");
         item.append("<option value='boot' class='arm'>Boots</option>");
-        item.append("<option value='sheild' class='arm'>Shields</option>");
+        item.append("<option value='shield' class='arm'>Shields</option>");
         item.append("<option value='quiver' class='arm'>Quivers</option>");
         type.append(item);
 
@@ -59,7 +59,15 @@
         $("#armoryFilterButton").on("click", function(){
             filterArmory(type.val(), item.val(), level.val());
         });
+
+        $("<select> #type").on("select", function(event){
+            var type = 0;
+        });
     };
+
+    function hideWeapons(){
+        $("<option> .wep").hide();
+    }
 
     function filterArmory(type, item, level){
         console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
