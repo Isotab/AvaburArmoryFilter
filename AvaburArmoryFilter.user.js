@@ -1,6 +1,8 @@
 // ==UserScript==
 // @name         Avabur Armory Filter
 // @namespace    https://github.com/theCanadianHat/AvaburArmoryFilter/
+// @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
+// @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @version      0.1
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
