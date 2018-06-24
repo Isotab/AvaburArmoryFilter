@@ -56,11 +56,11 @@
     };
 
     function setupWatches(){
-        $("#armoryFilterButton").on("click", function(){
+        filterButton.on("click", function(){
             filterArmory(typeSelect.val(), item.val(), level.val());
         });
 
-        $("<select> #type").on("select", function(event){
+        typeSelect.on("select", function(event){
             var type = 0;
         });
     };
