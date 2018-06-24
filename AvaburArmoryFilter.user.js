@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Avabur Armory Filter
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/theCanadianHat/AvaburArmoryFilter/
 // @version      0.1
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
