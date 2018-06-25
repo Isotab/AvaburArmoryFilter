@@ -101,7 +101,7 @@
     function filterArmory(type, item, level){
         console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
         //get table contents
-        var tableRows = armoryTable.children("<tr>");
+        var tableRows = armoryTable.dataTable().api().rows().data();
         //hide rows that don't meet criteria
         tableRows.each(checkRow(index, element, type, item, level));
     }
