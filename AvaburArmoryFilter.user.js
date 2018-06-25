@@ -111,14 +111,14 @@
     function filterArmory(type, item, level){
         console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
         //get table contents
-        var tableRows = armoryTable.api().rows().data();
+        var tableRows = armoryTable.dataTable().api().rows().data();
         //hide rows that don't meet criteria
         tableRows.each( function(index, element){
             if(!checkRow(index, element, type, item, level)){
-                armoryTable.api().row(element).remove();
+                armoryTable.dataTable().api().row(element).remove();
             }
         });
-        armoryTable.api().draw();
+        armoryTable.dataTable().api().draw();
     }
 
     function checkRow(index, element, type, item, level){
