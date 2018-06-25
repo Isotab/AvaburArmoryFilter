@@ -6,7 +6,7 @@
 // @version      0.1
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
-// @match        https://beta.avabur.com/game
+// @match        https://*avabur.com/game*
 // @grant        none
 // ==/UserScript==
 
@@ -60,7 +60,7 @@
             filterArmory(typeSelect.val(), item.val(), level.val());
         });
 
-        typeSelect.on("select", function(event){
+        typeSelect.select(function(event){
             var type = 0;
         });
     };
