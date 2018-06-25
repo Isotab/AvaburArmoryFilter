@@ -60,13 +60,20 @@
             filterArmory(typeSelect.val(), item.val(), level.val());
         });
 
-        typeSelect.select(function(event){
-            var type = 0;
+        typeSelect.select(function(){
+            var selection = $(this).val();
+            if(selection != ''){
+                if(selection == 'weapon'){
+                    //hide armor
+                }else{
+                    hideWeapons();
+                }
+            }
         });
     };
 
     function hideWeapons(){
-        $("<option> .wep").hide();
+        item.children(".wep").hide();
     }
 
     function filterArmory(type, item, level){
