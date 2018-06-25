@@ -6,7 +6,7 @@
 // @version      0.1
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
-// @match        https://*avabur.com/game*
+// @match        https://*.avabur.com/game*
 // @grant        none
 // ==/UserScript==
 
