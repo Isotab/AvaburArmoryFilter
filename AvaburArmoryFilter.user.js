@@ -12,8 +12,8 @@
 
 (function($) {
     'use strict';
-    var WEAPONS = ["sword", "bow", "staff"];
-    var ARMOR = ["helmet", "plate", "glove", "boot", "shield", "quiver"];
+    var WEAPONS = ["SWORDS", "BOWS", "STAVES"];
+    var ARMOR = ["HEMLETS", "BREASTPLATES", "GLOVES", "BOOTS", "SHIELDS", "QUIVERS"];
 
     var filterDiv;
     var typeSelect;
@@ -32,15 +32,15 @@
 
         item = $("<select>").attr("id", "item");
         item.append("<option value=''>--Item--</option>");
-        item.append("<option value='sword' class='wep'>Swords</option>");
-        item.append("<option value='bow' class='wep'>Bows</option>");
-        item.append("<option value='staff' class='wep'>Staves</option>");
-        item.append("<option value='helmet' class='arm'>Helmets</option>");
-        item.append("<option value='plate' class='arm'>Breastplates</option>");
-        item.append("<option value='glove' class='arm'>Gloves</option>");
-        item.append("<option value='boot' class='arm'>Boots</option>");
-        item.append("<option value='shield' class='arm'>Shields</option>");
-        item.append("<option value='quiver' class='arm'>Quivers</option>");
+        item.append("<option value='swords' class='wep'>Swords</option>");
+        item.append("<option value='bows' class='wep'>Bows</option>");
+        item.append("<option value='staves' class='wep'>Staves</option>");
+        item.append("<option value='helmets' class='arm'>Helmets</option>");
+        item.append("<option value='breastplates' class='arm'>Breastplates</option>");
+        item.append("<option value='gloves' class='arm'>Gloves</option>");
+        item.append("<option value='boots' class='arm'>Boots</option>");
+        item.append("<option value='shields' class='arm'>Shields</option>");
+        item.append("<option value='quivers' class='arm'>Quivers</option>");
         type.append(item);
 
         level = $("<input placeholder='Level' type='number'/>").attr("id", "level");
@@ -126,27 +126,40 @@
         var isLevel = false;
         var isType = false;
         var isItem = false;
+
+        
         //check element for level
-        if(level != '' && element.l == level){
-            isLevel = true;
+        if(level != ''){
+            var numLevel = parseInt(level, 10);
+            isLevel = numLevel == element.l;
         }else if(level == ''){
             isLevel = true;
         }
 
         //check element for item
-        if(type != '' && type == element.g){
-            isType = true;
+        if(type != ''){
+            isType = type == 'weapon' 
+                        ? itemIsWeapon(element.group_name.toUpperCase()) : 
+                          itemIsArmor(element.group_name.toUpperCase());
         }else if(type == ''){
             itType = true;
         }
 
-        if(item != '' && item == element.g){
-            isItem = true;
+        if(item != ''){
+            isItem = item.toUpperCase() === element.group_name.toUpperCase();
         }else if(item == ''){
             isItem = true;
         }
 
         return isLevel && isType && isItem;
+    }
+
+    function itemIsWeapon(group_name){
+        WEAPONS.
+    }
+
+    function itemIsArmor(group_name){
+
     }
 
     function init() {
