@@ -147,7 +147,7 @@
                         ? itemIsWeapon(element.group_name.toUpperCase()) : 
                           itemIsArmor(element.group_name.toUpperCase());
         }else if(type == ''){
-            itType = true;
+            isType = true;
         }
 
         if(item != ''){
