@@ -60,7 +60,7 @@
             filterArmory(typeSelect.val(), item.val(), level.val());
         });
 
-        typeSelect.select(function(){
+        typeSelect.change(function(event){
             var selection = $(this).val();
             if(selection != ''){
                 if(selection == 'weapon'){
@@ -68,6 +68,8 @@
                 }else{
                     hideWeapons();
                 }
+            }else{
+                //show weapons
             }
         });
     };
