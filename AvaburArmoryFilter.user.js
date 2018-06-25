@@ -108,6 +108,7 @@
                 armoryTable.api().row(element).remove();
             }
         });
+        armoryTable.api().draw();
     }
 
     function checkRow(index, element, type, item, level){
