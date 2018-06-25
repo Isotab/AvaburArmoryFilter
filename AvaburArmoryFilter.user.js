@@ -71,6 +71,7 @@
                     showArmor();
                     hideWeapons();
                 }
+                resetItems();
             }else{
                 showItems();
             }
@@ -79,32 +80,29 @@
 
     function hideWeapons(){
         item.children(".wep").hide();
-        resetItems();
     }
 
     function showWeapons(){
         item.children(".wep").show();
-        resetItems();
     }
 
     function hideArmor(){
         item.children(".arm").hide();
-        resetItems();
     }
 
     function showArmor(){
         item.children(".arm").show();
-        resetItems();
     }
 
     function showItems(){
         showArmor();
         showWeapons();
+        resetItems();
     }
 
     function resetItems(){
         if(item.val() != ''){
-           item.value('');
+           item.val('');
         }
     }
 
