@@ -155,11 +155,11 @@
     }
 
     function itemIsWeapon(group_name){
-        WEAPONS.
+        return WEAPONS.indexOf(group_name) > -1;
     }
 
     function itemIsArmor(group_name){
-
+        return ARMOR.indexOf(group_name) > -1;
     }
 
     function init() {
