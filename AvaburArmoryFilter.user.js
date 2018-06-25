@@ -120,6 +120,14 @@
     }
 
     function checkRow(element, index, type, item, level){
+        //check element for level
+        if(level != ''){
+
+        }
+        //check element for item
+        if(type != ''){
+            
+        }
         return false;
     }
 
