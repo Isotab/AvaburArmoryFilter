@@ -114,17 +114,17 @@
         //get table contents
         var tableRows = armoryTable.dataTable().api().rows().data();
         //hide rows that don't meet criteria
-        tableRows.each( function(element, index){
-            if(!checkRow(element, index, type, item, level)){
-                armoryTable.dataTable().api().row($(element)).remove();
-            }
-        });
+        // tableRows.each( function(element, index){
+        //     if(!checkRow(element, index, type, item, level)){
+        //         armoryTable.dataTable().api().row($(element)).remove();
+        //     }
+        // });
 
         armoryTable.dataTable().filter(function(row){
-            var x=0;
+            console.log(row);
         });
 
-        armoryTable.dataTable().api().draw();
+        armoryTable.dataTable().draw();
     }
 
     function checkRow(element, index, type, item, level){
@@ -168,7 +168,7 @@
     }
 
     function init() {
-        console.log("In init()");
+        console.log("Initializing Armory Filter");
         insertHtml();
         setupWatches();
     };
