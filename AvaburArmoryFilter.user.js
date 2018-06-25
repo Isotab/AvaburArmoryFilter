@@ -20,7 +20,7 @@
     var item;
     var level;
     var filterButton;
-    var armoryTable = $("#clanInventoryTable");
+    var armoryDataTable = $("#clanInventoryTable").DataTable();
 
     function createTypeSelect(){
         var type = $("<div>").attr("id", "armoryFilter");
@@ -54,9 +54,9 @@
     function insertHtml(){
         filterDiv = $("<div>").attr("id","armoryFilter");
         filterDiv.append(createTypeSelect());
-        var clanArmoryTable = $("#clanInventoryTable_filter");
-        clanArmoryTable.after(filterDiv);
-        clanArmoryTable.hide();
+        var armoryOldFilter = $("#clanInventoryTable_filter");
+        armoryOldFilter.after(filterDiv);
+        armoryOldFilter.hide();
     };
 
     function setupWatches(){
@@ -112,19 +112,19 @@
     function filterArmory(type, item, level){
         console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
         //get table contents
-        var tableRows = armoryTable.dataTable().api().rows().data();
+        var tableRows = armoryDataTable.rows().data();
         //hide rows that don't meet criteria
         // tableRows.each( function(element, index){
         //     if(!checkRow(element, index, type, item, level)){
-        //         armoryTable.dataTable().api().row($(element)).remove();
+        //         armoryDataTable.dataTable().api().row($(element)).remove();
         //     }
         // });
 
-        armoryTable.dataTable().filter(function(row){
+        armoryDataTable.filter(function(row){
             console.log(row);
         });
 
-        armoryTable.dataTable().draw();
+        armoryDataTable.draw();
     }
 
     function checkRow(element, index, type, item, level){
