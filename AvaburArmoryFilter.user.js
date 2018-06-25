@@ -119,6 +119,11 @@
                 armoryTable.dataTable().api().row($(element)).remove();
             }
         });
+
+        armoryTable.dataTable().filter(function(row){
+            var x=0;
+        });
+
         armoryTable.dataTable().api().draw();
     }
 
