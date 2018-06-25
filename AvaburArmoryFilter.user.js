@@ -116,7 +116,7 @@
         //hide rows that don't meet criteria
         tableRows.each( function(element, index){
             if(!checkRow(element, index, type, item, level)){
-                armoryTable.dataTable().api().row(element).remove();
+                armoryTable.dataTable().api().row($(element)).remove();
             }
         });
         armoryTable.dataTable().api().draw();
