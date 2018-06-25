@@ -12,6 +12,9 @@
 
 (function($) {
     'use strict';
+    var WEAPONS = ["sword", "bow", "staff"];
+    var ARMOR = ["helmet", "plate", "glove", "boot", "shield", "quiver"];
+
     var filterDiv;
     var typeSelect;
     var item;
@@ -120,15 +123,30 @@
     }
 
     function checkRow(element, index, type, item, level){
+        var isLevel = false;
+        var isType = false;
+        var isItem = false;
         //check element for level
-        if(level != ''){
+        if(level != '' && element.l == level){
+            isLevel = true;
+        }else if(level == ''){
+            isLevel = true;
+        }
 
-        }
         //check element for item
-        if(type != ''){
-            
+        if(type != '' && type == element.g){
+            isType = true;
+        }else if(type == ''){
+            itType = true;
         }
-        return false;
+
+        if(item != '' && item == element.g){
+            isItem = true;
+        }else if(item == ''){
+            isItem = true;
+        }
+
+        return isLevel && isType && isItem;
     }
 
     function init() {
