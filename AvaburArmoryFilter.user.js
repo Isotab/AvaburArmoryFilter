@@ -111,7 +111,7 @@
         //get table contents
         var tableRows = armoryTable.dataTable().api().rows().data();
         //hide rows that don't meet criteria
-        tableRows.each( function(index, element){
+        tableRows.each( function(element, index){
             if(!checkRow(element, index, type, item, level)){
                 armoryTable.dataTable().api().row(element).remove();
             }
