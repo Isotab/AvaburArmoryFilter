@@ -17,6 +17,7 @@
     var item;
     var level;
     var filterButton;
+    var armoryTable = $("#clanInventoryTable");
 
     function createTypeSelect(){
         var type = $("<div>").attr("id", "armoryFilter");
@@ -64,12 +65,14 @@
             var selection = $(this).val();
             if(selection != ''){
                 if(selection == 'weapon'){
-                    //hide armor
+                    hideArmor();
+                    showWeapons();
                 }else{
+                    showArmor();
                     hideWeapons();
                 }
             }else{
-                //show weapons
+                showItems();
             }
         });
     };
@@ -78,10 +81,33 @@
         item.children(".wep").hide();
     }
 
+    function showWeapons(){
+        item.children(".wep").show();
+    }
+
+    function hideArmor(){
+        item.children(".arm").hide();
+    }
+
+    function showArmor(){
+        item.children(".arm").show();
+    }
+
+    function showItems(){
+        showArmor();
+        showWeapons();
+    }
+
     function filterArmory(type, item, level){
         console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
         //get table contents
+        var tableRows = armoryTable.children("<tr>");
         //hide rows that don't meet criteria
+        tableRows.each(checkRow(index, element, type, item, level));
+    }
+
+    function checkRow(index, element, type, item, level){
+        var x = 0;
     }
 
     function init() {
