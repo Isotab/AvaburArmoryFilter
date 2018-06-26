@@ -161,6 +161,8 @@
           }
 
           return isLevel && isType && isItem;
+      }else{
+        return true;
       }
     }
   );
