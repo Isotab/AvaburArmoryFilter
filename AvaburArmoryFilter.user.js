@@ -129,37 +129,39 @@
 
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex){
-      var itemType = data[0].split(" ").pop();
-      var itemLevel = data[1];
+      if(settings.sInstance == "clanInventoryTable"){
+          var itemType = data[0].split(" ").pop();
+          var itemLevel = data[1];
 
-      var isLevel = false;
-      if(level.val() != ''){
-        isLevel = level.val() == itemLevel;
-      }else if(level.val() == ''){
-        isLevel = true;
-      }
-      if(!isLevel){
-        return false;
-      }
+          var isLevel = false;
+          if(level.val() != ''){
+            isLevel = level.val() == itemLevel;
+          }else if(level.val() == ''){
+            isLevel = true;
+          }
+          if(!isLevel){
+            return false;
+          }
 
-      var isType = false;
-      if(typeSelect.val() != ''){
-        isType = typeSelect.val() == 'weapon' ? itemIsWeapon(itemType) : itemIsArmor(itemType);
-      }else if(typeSelect.val() == ''){
-        isType = true;
-      }
-      if(!isType){
-        return false;
-      }
+          var isType = false;
+          if(typeSelect.val() != ''){
+            isType = typeSelect.val() == 'weapon' ? itemIsWeapon(itemType) : itemIsArmor(itemType);
+          }else if(typeSelect.val() == ''){
+            isType = true;
+          }
+          if(!isType){
+            return false;
+          }
 
-      var isItem = false;
-      if(item.val() != ''){
-        isItem = item.val().toUpperCase() == itemType.toUpperCase();
-      }else{
-        return true;
-      }
+          var isItem = false;
+          if(item.val() != ''){
+            isItem = item.val().toUpperCase() == itemType.toUpperCase();
+          }else{
+            return true;
+          }
 
-      return isLevel && isType && isItem;
+          return isLevel && isType && isItem;
+      }
     }
   );
 
