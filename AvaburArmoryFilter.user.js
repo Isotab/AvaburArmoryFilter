@@ -81,6 +81,12 @@
                 showItems();
             }
         });
+
+        $(".closeModal, #modalBackground").on("click", function(e){
+          e.preventDefault();
+          resetFilter();
+        });
+
     };
 
     function hideWeapons(){
@@ -111,6 +117,18 @@
         }
     }
 
+    function resetFilter(){
+        if(typeSelect.val() != ''){
+            typeSelect.val("");
+        }
+        if(item.val() != ''){
+            item.val("");
+        }
+        if(level.val() != ''){
+            level.val("");
+        }
+    }
+
     function itemIsWeapon(itemType){
         return WEAPONS.indexOf(itemType.toUpperCase()) > -1;
     }
@@ -125,7 +143,7 @@
         setupWatches();
     };
 
-    $("#clanInventoryTable_filter").ready(function(){
+    $(window).on("load", function(){
         init();
     });
 
