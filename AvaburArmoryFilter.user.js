@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      0.0.1
+// @version      1.0.0
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -11,168 +11,191 @@
 // ==/UserScript==
 
 (function($) {
-    'use strict';
-    var WEAPONS = ["SWORDS", "BOWS", "STAVES"];
-    var ARMOR = ["HEMLETS", "BREASTPLATES", "GLOVES", "BOOTS", "SHIELDS", "QUIVERS"];
+  'use strict';
 
-    var filterDiv;
-    var typeSelect;
-    var item;
-    var level;
-    var filterButton;
-    var armoryDataTable = $("#clanInventoryTable").DataTable();
+  var WEAPONS = ["SWORDS", "BOWS", "STAVES", "SWORD", "BOW", "STAFF"];
+  var ARMOR = ["HELMETS", "BREASTPLATES", "GLOVES", "BOOTS", "SHIELDS", "QUIVERS",
+               "HELMET", "BREASTPLATE", "SHIELD", "QUIVER"];
 
-    function createTypeSelect(){
-        var type = $("<div>").attr("id", "armoryFilter");
-        typeSelect = $("<select>").attr("id", "type");
-        typeSelect.append("<option value=''>--Type--</option>");
-        typeSelect.append("<option value='weapon'>Weapons</option>");
-        typeSelect.append("<option value='armor'>Armor</option>");
-        type.append(typeSelect);
+  var filterDiv;
+  var typeSelect;
+  var item;
+  var level;
+  var filterButton;
+  var armoryDataTable = $("#clanInventoryTable").DataTable();
 
-        item = $("<select>").attr("id", "item");
-        item.append("<option value=''>--Item--</option>");
-        item.append("<option value='swords' class='wep'>Swords</option>");
-        item.append("<option value='bows' class='wep'>Bows</option>");
-        item.append("<option value='staves' class='wep'>Staves</option>");
-        item.append("<option value='helmets' class='arm'>Helmets</option>");
-        item.append("<option value='breastplates' class='arm'>Breastplates</option>");
-        item.append("<option value='gloves' class='arm'>Gloves</option>");
-        item.append("<option value='boots' class='arm'>Boots</option>");
-        item.append("<option value='shields' class='arm'>Shields</option>");
-        item.append("<option value='quivers' class='arm'>Quivers</option>");
-        type.append(item);
+  function createTypeSelect(){
+    var type = $("<div>").attr("id", "armoryFilter");
+    typeSelect = $("<select>").attr("id", "type");
+    typeSelect.append("<option value=''>--Type--</option>");
+    typeSelect.append("<option value='weapon'>Weapons</option>");
+    typeSelect.append("<option value='armor'>Armor</option>");
+    type.append(typeSelect);
 
-        level = $("<input placeholder='Level' type='number'/>").attr("id", "level");
-        type.append(level);
+    item = $("<select>").attr("id", "item");
+    item.append("<option value=''>--Item--</option>");
+    item.append("<option value='sword' class='wep'>Swords</option>");
+    item.append("<option value='bow' class='wep'>Bows</option>");
+    item.append("<option value='staff' class='wep'>Staves</option>");
+    item.append("<option value='helmet' class='arm'>Helmets</option>");
+    item.append("<option value='breastplate' class='arm'>Breastplates</option>");
+    item.append("<option value='gloves' class='arm'>Gloves</option>");
+    item.append("<option value='boots' class='arm'>Boots</option>");
+    item.append("<option value='shield' class='arm'>Shields</option>");
+    item.append("<option value='quiver' class='arm'>Quivers</option>");
+    type.append(item);
 
-        filterButton = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton");
-        type.append(filterButton);
-        return type;
-    }
+    level = $("<input placeholder='Level' type='number'/>").attr("id", "level");
+    type.append(level);
 
-    function insertHtml(){
-        filterDiv = $("<div>").attr("id","armoryFilter");
-        filterDiv.append(createTypeSelect());
-        var armoryOldFilter = $("#clanInventoryTable_filter");
-        armoryOldFilter.after(filterDiv);
-        armoryOldFilter.hide();
-    };
+    filterButton = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton");
+    type.append(filterButton);
+    return type;
+  }
 
-    function setupWatches(){
-        filterButton.on("click", function(){
-            filterArmory(typeSelect.val(), item.val(), level.val());
-        });
+  function insertHtml(){
+    filterDiv = $("<div>").attr("id","armoryFilter");
+    filterDiv.append(createTypeSelect());
+    var armoryOldFilter = $("#clanInventoryTable_filter");
+    armoryOldFilter.after(filterDiv);
+    armoryOldFilter.hide();
+  };
 
-        typeSelect.change(function(event){
-            var selection = $(this).val();
-            if(selection != ''){
-                if(selection == 'weapon'){
-                    hideArmor();
-                    showWeapons();
-                }else{
-                    showArmor();
-                    hideWeapons();
-                }
-                resetItems();
-            }else{
-                showItems();
-            }
-        });
-    };
+  function setupWatches(){
+    filterButton.on("click", function(){
+      console.log("Filtering Armory Selection for Type: " + typeSelect.val() + ", Item: " + item.val() + ", Level: " + level.val());
+      armoryDataTable.draw();
+    });
 
-    function hideWeapons(){
-        item.children(".wep").hide();
-    }
-
-    function showWeapons(){
-        item.children(".wep").show();
-    }
-
-    function hideArmor(){
-        item.children(".arm").hide();
-    }
-
-    function showArmor(){
-        item.children(".arm").show();
-    }
-
-    function showItems(){
-        showArmor();
-        showWeapons();
+    typeSelect.change(function(event){
+      var selection = $(this).val();
+      if(selection != ''){
+        if(selection == 'weapon'){
+          hideArmor();
+          showWeapons();
+        }else{
+          showArmor();
+          hideWeapons();
+        }
         resetItems();
+      }else{
+        showItems();
+      }
+    });
+  };
+
+  function hideWeapons(){
+    item.children(".wep").hide();
+  }
+
+  function showWeapons(){
+    item.children(".wep").show();
+  }
+
+  function hideArmor(){
+    item.children(".arm").hide();
+  }
+
+  function showArmor(){
+    item.children(".arm").show();
+  }
+
+  function showItems(){
+    showArmor();
+    showWeapons();
+    resetItems();
+  }
+
+  function resetItems(){
+    if(item.val() != ''){
+      item.val('');
+    }
+  }
+
+  function checkRow(row, type, item, level){
+    var isLevel = false;
+    var isType = false;
+    var isItem = false;
+
+
+    //check row for level
+    if(level != ''){
+      var numLevel = parseInt(level, 10);
+      isLevel = numLevel == row.l;
+    }else if(level == ''){
+      isLevel = true;
     }
 
-    function resetItems(){
-        if(item.val() != ''){
-           item.val('');
-        }
+    //check row for item
+    if(type != ''){
+      isType = type == 'weapon'
+        ? itemIsWeapon(row.group_name.toUpperCase()) :
+      itemIsArmor(row.group_name.toUpperCase());
+    }else if(type == ''){
+      isType = true;
     }
 
-    function filterArmory(type, item, level){
-        console.log("Filtering Armory Selection for Type: " + type + ", Item: " + item + ", Level: " + level);
-        //get table contents
-        var tableRows = armoryDataTable.rows().data();
-        //hide rows that don't meet criteria
-        // tableRows.each( function(element, index){
-        //     if(!checkRow(element, index, type, item, level)){
-        //         armoryDataTable.dataTable().api().row($(element)).remove();
-        //     }
-        // });
-
-        armoryDataTable.filter(function(row){
-            console.log(row);
-        });
-
-        armoryDataTable.draw();
+    if(item != ''){
+      isItem = item.toUpperCase() === row.group_name.toUpperCase();
+    }else if(item == ''){
+      isItem = true;
     }
 
-    function checkRow(element, index, type, item, level){
-        var isLevel = false;
-        var isType = false;
-        var isItem = false;
+    return isLevel && isType && isItem;
+  }
 
-        
-        //check element for level
-        if(level != ''){
-            var numLevel = parseInt(level, 10);
-            isLevel = numLevel == element.l;
-        }else if(level == ''){
-            isLevel = true;
-        }
+  function itemIsWeapon(itemType){
+    return WEAPONS.indexOf(itemType.toUpperCase()) > -1;
+  }
 
-        //check element for item
-        if(type != ''){
-            isType = type == 'weapon' 
-                        ? itemIsWeapon(element.group_name.toUpperCase()) : 
-                          itemIsArmor(element.group_name.toUpperCase());
-        }else if(type == ''){
-            isType = true;
-        }
+  function itemIsArmor(itemType){
+    return ARMOR.indexOf(itemType.toUpperCase()) > -1;
+  }
 
-        if(item != ''){
-            isItem = item.toUpperCase() === element.group_name.toUpperCase();
-        }else if(item == ''){
-            isItem = true;
-        }
+  function init() {
+    console.log("Initializing Armory Filter");
+    insertHtml();
+    setupWatches();
+  };
+  init();
 
-        return isLevel && isType && isItem;
+  $.fn.dataTable.ext.search.push(
+    function(settings, data, dataIndex){
+      var itemType = data[0].split(" ").pop();
+      var itemLevel = data[1];
+      var isLevel = false;
+      var isType = false;
+      var isItem = false;
+
+      //check row for level
+      if(level.val() != ''){
+        isLevel = level.val() == itemLevel;
+      }else if(level.val() == ''){
+        isLevel = true;
+      }
+      if(!isLevel){
+        return false;
+      }
+      //check row for item
+      if(typeSelect.val() != ''){
+        isType = typeSelect.val() == 'weapon' ? itemIsWeapon(itemType) : itemIsArmor(itemType);
+      }else if(typeSelect.val() == ''){
+        isType = true;
+      }
+      if(!isType){
+        return false;
+      }
+      if(item.val() != ''){
+        isItem = item.val().toUpperCase() == itemType.toUpperCase();
+      }else{
+        return true;
+      }
+
+      //if(isLevel && isType && isItem){
+      //return true;
+      //}
+      return isLevel && isType && isItem;
     }
-
-    function itemIsWeapon(group_name){
-        return WEAPONS.indexOf(group_name) > -1;
-    }
-
-    function itemIsArmor(group_name){
-        return ARMOR.indexOf(group_name) > -1;
-    }
-
-    function init() {
-        console.log("Initializing Armory Filter");
-        insertHtml();
-        setupWatches();
-    };
-
-    window.addEventListener('load', init, {once: true});
+  );
 
 })(jQuery);
