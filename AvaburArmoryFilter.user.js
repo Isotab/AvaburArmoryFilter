@@ -129,7 +129,9 @@
 
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex){
-      if(settings.sInstance == "clanInventoryTable"){
+      if(settings.sInstance != "clanInventoryTable"){
+        return true;
+      }else{
           var itemType = data[0].split(" ").pop();
           var itemLevel = data[1];
 
@@ -161,8 +163,6 @@
           }
 
           return isLevel && isType && isItem;
-      }else{
-        return true;
       }
     }
   );
