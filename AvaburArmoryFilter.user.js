@@ -22,7 +22,6 @@
   var item;
   var level;
   var filterButton;
-  var armoryDataTable = $("#clanInventoryTable").DataTable();
 
   function createTypeSelect(){
     var type = $("<div>").attr("id", "armoryFilter");
@@ -63,8 +62,8 @@
 
   function setupWatches(){
     filterButton.on("click", function(){
-      console.log("Filtering Armory Selection for Type: " + typeSelect.val() + ", Item: " + item.val() + ", Level: " + level.val());
-      armoryDataTable.draw();
+      //console.log("Filtering Armory Selection for Type: " + typeSelect.val() + ", Item: " + item.val() + ", Level: " + level.val());
+      $("#clanInventoryTable").DataTable().draw();
     });
 
     typeSelect.change(function(event){
@@ -112,38 +111,6 @@
     }
   }
 
-  function checkRow(row, type, item, level){
-    var isLevel = false;
-    var isType = false;
-    var isItem = false;
-
-
-    //check row for level
-    if(level != ''){
-      var numLevel = parseInt(level, 10);
-      isLevel = numLevel == row.l;
-    }else if(level == ''){
-      isLevel = true;
-    }
-
-    //check row for item
-    if(type != ''){
-      isType = type == 'weapon'
-        ? itemIsWeapon(row.group_name.toUpperCase()) :
-      itemIsArmor(row.group_name.toUpperCase());
-    }else if(type == ''){
-      isType = true;
-    }
-
-    if(item != ''){
-      isItem = item.toUpperCase() === row.group_name.toUpperCase();
-    }else if(item == ''){
-      isItem = true;
-    }
-
-    return isLevel && isType && isItem;
-  }
-
   function itemIsWeapon(itemType){
     return WEAPONS.indexOf(itemType.toUpperCase()) > -1;
   }
@@ -153,21 +120,19 @@
   }
 
   function init() {
-    console.log("Initializing Armory Filter");
+    //console.log("Initializing Armory Filter");
     insertHtml();
     setupWatches();
   };
+
   init();
 
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex){
       var itemType = data[0].split(" ").pop();
       var itemLevel = data[1];
-      var isLevel = false;
-      var isType = false;
-      var isItem = false;
 
-      //check row for level
+      var isLevel = false;
       if(level.val() != ''){
         isLevel = level.val() == itemLevel;
       }else if(level.val() == ''){
@@ -176,7 +141,8 @@
       if(!isLevel){
         return false;
       }
-      //check row for item
+
+      var isType = false;
       if(typeSelect.val() != ''){
         isType = typeSelect.val() == 'weapon' ? itemIsWeapon(itemType) : itemIsArmor(itemType);
       }else if(typeSelect.val() == ''){
@@ -185,15 +151,14 @@
       if(!isType){
         return false;
       }
+
+      var isItem = false;
       if(item.val() != ''){
         isItem = item.val().toUpperCase() == itemType.toUpperCase();
       }else{
         return true;
       }
 
-      //if(isLevel && isType && isItem){
-      //return true;
-      //}
       return isLevel && isType && isItem;
     }
   );
