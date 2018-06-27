@@ -25,13 +25,13 @@
 
     function createTypeSelect(){
         var type = $("<div>").attr("id", "armoryFilter").addClass("row").css("padding","0px 15px");
-        typeSelect = $("<select>").attr("id", "type").addClass("col-md-3");
+        typeSelect = $("<select>").attr("id", "type").addClass("col-md-3").css({"height":"24px","text-align-last":"center"});
         typeSelect.append("<option value=''>--Type--</option>");
         typeSelect.append("<option value='weapon'>Weapons</option>");
         typeSelect.append("<option value='armor'>Armor</option>");
         type.append(typeSelect);
 
-        item = $("<select>").attr("id", "item");
+        item = $("<select>").attr("id", "item").addClass("col-md-3").css({"height":"24px","text-align-last":"center"});
         item.append("<option value=''>--Item--</option>");
         item.append("<option value='sword' class='wep'>Swords</option>");
         item.append("<option value='bow' class='wep'>Bows</option>");
@@ -44,11 +44,14 @@
         item.append("<option value='quiver' class='arm'>Quivers</option>");
         type.append(item);
 
-        level = $("<input placeholder='Level' type='number'/>").attr("id", "level");
+        level = $("<input placeholder='Level' type='number'/>").attr("id", "level").addClass("col-md-3").css({"height":"24px","text-align":"center"});
         type.append(level);
 
-        filterButton = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton");
+        // filterButton = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton").addClass("col-md-3").css("height","24px");
+        filterButton = $("<a role='button' img='')
         type.append(filterButton);
+
+
         return type;
     }
 
