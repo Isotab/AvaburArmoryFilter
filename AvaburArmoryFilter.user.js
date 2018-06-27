@@ -3,6 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
+// @required     https://github.com/theCanadianHat/AvaburArmoryFilter/raw/test/img/search_filter_white.png
 // @version      1.0.1
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
@@ -23,8 +24,8 @@
     var filterButton;
 
     function createTypeSelect(){
-        var type = $("<div>").attr("id", "armoryFilter");
-        typeSelect = $("<select>").attr("id", "type");
+        var type = $("<div>").attr("id", "armoryFilter").addClass("row").css("padding","0px 15px");
+        typeSelect = $("<select>").attr("id", "type").addClass("col-md-3");
         typeSelect.append("<option value=''>--Type--</option>");
         typeSelect.append("<option value='weapon'>Weapons</option>");
         typeSelect.append("<option value='armor'>Armor</option>");
@@ -52,8 +53,7 @@
     }
 
     function insertHtml(){
-        filterDiv = $("<div>").attr("id","armoryFilter");
-        filterDiv.append(createTypeSelect());
+        filterDiv = createTypeSelect();
         var armoryOldFilter = $("#clanInventoryTable_filter");
         armoryOldFilter.after(filterDiv);
         armoryOldFilter.hide();
