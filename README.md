@@ -18,3 +18,8 @@ Added new filters in the Clan's Armory. You can now filter by item type (Weapons
 # v1.0.1
 When leaving the Clan modal the filters will be reset.
 This script now loads when the window is ready to help prevent undefined values.
+
+# v1.0.1
+Added CSS
+Added Power criteria
+Surprises!
