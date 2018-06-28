@@ -46,13 +46,13 @@
         item.append("<option value=''>--Item--</option>");
         item.append("<option value='Swords' class='wep'>Swords</option>");
         item.append("<option value='Bows' class='wep'>Bows</option>");
-        item.append("<option value='staff' class='wep'>Staves</option>");
-        item.append("<option value='helmet' class='arm'>Helmets</option>");
-        item.append("<option value='breastplate' class='arm'>Breastplates</option>");
-        item.append("<option value='gloves' class='arm'>Gloves</option>");
-        item.append("<option value='boots' class='arm'>Boots</option>");
-        item.append("<option value='shield' class='arm'>Shields</option>");
-        item.append("<option value='quiver' class='arm'>Quivers</option>");
+        item.append("<option value='Staves' class='wep'>Staves</option>");
+        item.append("<option value='Helmets' class='arm'>Helmets</option>");
+        item.append("<option value='Breastplates' class='arm'>Breastplates</option>");
+        item.append("<option value='Gloves' class='arm'>Gloves</option>");
+        item.append("<option value='Boots' class='arm'>Boots</option>");
+        item.append("<option value='Shields' class='arm'>Shields</option>");
+        item.append("<option value='Quivers' class='arm'>Quivers</option>");
 
         temp = $("<div>").addClass("col-md-4").css("padding","0px 2px");
         temp.append(item);
@@ -237,7 +237,7 @@
 
                 var isItem = false;
                 if(item.val() != ''){
-                    isItem = item.val().toUpperCase() == data[6].toUpperCase();
+                    isItem = item.val() == data[6];
                 }else{
                     return true;
                 }
