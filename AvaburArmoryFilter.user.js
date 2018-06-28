@@ -3,8 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @required     https://github.com/theCanadianHat/AvaburArmoryFilter/raw/test/img/search_filter_white.png
-// @version      1.0.1
+// @version      1.0.2
 // @description  Filter armory items in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -16,25 +15,37 @@
 
     var WEAPONS = ["SWORDS", "BOWS", "STAVES"];
     var ARMOR = ["HELMETS", "BREASTPLATES", "GLOVES", "BOOTS", "SHIELDS", "QUIVERS"];
+    var Bp = [":)",":(",":/","B)","<3",":D",":P","CLICKING!",":O","XD","More!!","Coming","Soon"];
 
     var filterDiv;
     var typeSelect;
     var item;
     var level;
+    var power;
     var filterButton;
+    var comingSoon;
 
     function createTypeSelect(){
-        var type = $("<div>").attr("id", "armoryFilter").addClass("row").css("padding","0px 15px");
-        typeSelect = $("<select>").attr("id", "type").addClass("col-md-3").css({"height":"24px","text-align-last":"center"});
+        var row = $("<div>").attr("id", "armoryFilterDiv").addClass("row").css("padding","0px 15px");
+        var criteria = $("<div>").addClass("col-md-9").css("padding","0");
+        var submit = $("<div>").addClass("col-md-3").css("padding","0");
+
+        typeSelect = $("<select>")
+          .attr("id", "itemTypeSelect")
+          .addClass("col-md-12")
+          .css({"height":"24px","text-align-last":"center","padding-left":"0px"});
         typeSelect.append("<option value=''>--Type--</option>");
         typeSelect.append("<option value='weapon'>Weapons</option>");
         typeSelect.append("<option value='armor'>Armor</option>");
-        type.append(typeSelect);
 
-        item = $("<select>").attr("id", "item").addClass("col-md-3").css({"height":"24px","text-align-last":"center"});
+        var temp = $("<div>").addClass("col-md-4").css({"padding-left":"0px","padding-right":"2px"});
+        temp.append(typeSelect);
+        criteria.append(temp);
+
+        item = $("<select>").attr("id", "itemSelect").addClass("col-md-12").css({"height":"24px","text-align-last":"center"});
         item.append("<option value=''>--Item--</option>");
-        item.append("<option value='sword' class='wep'>Swords</option>");
-        item.append("<option value='bow' class='wep'>Bows</option>");
+        item.append("<option value='Swords' class='wep'>Swords</option>");
+        item.append("<option value='Bows' class='wep'>Bows</option>");
         item.append("<option value='staff' class='wep'>Staves</option>");
         item.append("<option value='helmet' class='arm'>Helmets</option>");
         item.append("<option value='breastplate' class='arm'>Breastplates</option>");
@@ -42,17 +53,45 @@
         item.append("<option value='boots' class='arm'>Boots</option>");
         item.append("<option value='shield' class='arm'>Shields</option>");
         item.append("<option value='quiver' class='arm'>Quivers</option>");
-        type.append(item);
 
-        level = $("<input placeholder='Level' type='number'/>").attr("id", "level").addClass("col-md-3").css({"height":"24px","text-align":"center"});
-        type.append(level);
-
-        // filterButton = $("<input type='button' value='Filter'/>").attr("id", "armoryFilterButton").addClass("col-md-3").css("height","24px");
-        filterButton = $("<a role='button' img='')
-        type.append(filterButton);
+        temp = $("<div>").addClass("col-md-4").css("padding","0px 2px");
+        temp.append(item);
+        criteria.append(temp);
 
 
-        return type;
+
+        level = $("<input placeholder='Lvl' type='number'/>")
+                  .attr("id", "level")
+                  .attr("title", "Equals")
+                  .addClass("col-md-12")
+                  .css({"height":"24px","text-align":"center"});
+        temp = $("<div>").addClass("col-md-2").css({"padding":"0px 2px"});
+        temp.append(level);
+        criteria.append(temp);
+
+        power = $("<input placeholder='Pwr' type='number'/>")
+                  .attr("id", "power")
+                  .attr("title","Greater than or Equals")
+                  .addClass("col-md-12")
+                  .css({"height":"24px","text-align":"center"});
+        temp = $("<div>").addClass("col-md-2").css({"padding":"0px 2px"});
+        temp.append(power);
+        criteria.append(temp);
+
+        comingSoon = $("<button>:)</button>").attr("id","comingSoonButton").attr("title","Updates coming!!!").addClass("col-md-12").css("height","24px");
+        temp = $("<div>").addClass("col-md-6").css({"padding":"0px 2px"});
+        temp.append(comingSoon);
+        submit.append(temp);
+
+        temp = $("<div>").addClass("col-md-6").css({"padding-left":"2px","padding-right":"0px"});
+        filterButton = $("<button>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
+        temp.append(filterButton);
+        submit.append(temp);
+
+        row.append(criteria);
+        row.append(submit);
+
+        return row;
     }
 
     function insertHtml(){
@@ -87,6 +126,11 @@
         $(".closeModal, #modalBackground").on("click", function(e){
           e.preventDefault();
           resetFilter();
+        });
+
+        comingSoon.on("click", function() {
+          var i = Math.floor((Math.random() * Bp.length));
+          comingSoon.text(Bp[i]);
         });
 
     };
@@ -129,6 +173,9 @@
         if(level.val() != ''){
             level.val("");
         }
+        if(power.val() != ''){
+            power.val("");
+        }
     }
 
     function itemIsWeapon(itemType){
@@ -155,17 +202,18 @@
             if(settings.sInstance != "clanInventoryTable"){
                 return true;
             }else{
-
+                /*
+                data[0] name
+                data[1] level
+                data[2] power
+                data[3] gems
+                data[4] bonuses
+                data[5] holder
+                data[6] type
+                */
                 if(noFilter()){
                     return true;
                 }
-
-                var itemLevel = data[1];
-                var itemPower = data[2];
-                var itemGems = date[3];
-                var itemBoosts = data[4];
-                var itemAvailable = data[5];
-                var itemType = data[6];
 
                 var isLevel = false;
                 if(level.val() != ''){
@@ -174,6 +222,16 @@
                     isLevel = true;
                 }
                 if(!isLevel){
+                    return false;
+                }
+
+                var isPower = false;
+                if(power.val() != ''){
+                    isPower = parseInt(power.val()) <= parseInt(data[2]);
+                }else{
+                    isPower = true;
+                }
+                if(!isPower){
                     return false;
                 }
 
@@ -196,7 +254,10 @@
     );
 
     function noFilter(){
-        return level.val() == '' && typeSelect.val() == '' && level.val() == '';
+        return typeSelect.val() == '' &&
+          item.val() == '' &&
+          level.val() == '' &&
+          power.val() == '';
     }
 
 })(jQuery);
