@@ -10,7 +10,7 @@
 - That's it! Enjoy
 
 # Issues
-If you come across something that doesn't seem right please report an issue through GitHub.
+- If you come across something that doesn't seem right please report an issue through GitHub.
 
 # v1.0.0
 - Added new filters in the Clan's Armory. 
