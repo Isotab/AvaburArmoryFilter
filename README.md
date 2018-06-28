@@ -17,17 +17,17 @@
 # Issues
 - If you come across something that doesn't seem right please report an issue through GitHub.
 
-# v1.0.0
+# v1.0
 - Added new filters in the Clan's Armory. 
 - You can now filter by item type (Weapons, and Armor), by item (specific type of item i.e. Bows), and by level (the actual level of the item). 
 - If you want to search for something by just one of these criteria leave the input(s) blank. 
 - Example: If you want just Bows then set the item select to bows and filter.
 
-# v1.0.1
+# v1.1
 - When leaving the Clan modal the filters will be reset.
 - This script now loads when the window is ready to help prevent undefined values.
 
-# v1.0.1
+# v1.2
 - Added CSS 
 - Added Power criteria
 - Surprises!
