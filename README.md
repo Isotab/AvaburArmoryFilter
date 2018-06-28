@@ -1,5 +1,10 @@
 # AvaburArmoryFilter
-- TamperMonkey script that will enhance search filtering in the clan's armory.
+- TamperMonkey script that enhances search filtering in the clan's armory.
+- Thank you everyone helping with testing
+  - WinterPhoenix
+  - Vysn
+  - Bento
+  - VBMS
 
 
 # Installation
