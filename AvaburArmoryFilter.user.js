@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.3.2
+// @version      1.3.3
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
