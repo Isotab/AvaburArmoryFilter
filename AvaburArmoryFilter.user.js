@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.3.0
+// @version      1.3.2
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -64,7 +64,7 @@
 
         levelInput = $("<input placeholder='Lvl' type='number'/>")
             .attr("id", "levelInput")
-            .attr("title", "Equals")
+            .attr("title", "Greater than or Equals")
             .addClass("col-md-12")
             .css({"height":"24px","text-align":"center"});
         temp = $("<div>").addClass("col-md-2").css({"padding":"0px 2px"});
@@ -225,7 +225,7 @@
 
         if(item != false){
             var itemType = itemSelectIsWeapon(item) ? "weapon" : "armor";
-            if(armor){
+            if("armor"){
                 switch(item){
                     case "Helmets":
                         return "helmet";
@@ -298,7 +298,7 @@
                 var available = itemAvailableInput[0].checked ? data[5] == "None" : true;
                 if(!available) { return false; }
 
-                var isLevel = levelInput.val() != '' ? levelInput.val() == data[1] : true;
+                var isLevel = levelInput.val() != '' ? parseInt(levelInput.val()) <= data[1] : true;
                 if(!isLevel){ return false; }
 
                 var isPower = powerInput.val() != '' ? parseInt(powerInput.val()) <= parseInt(data[2]) : true ;
