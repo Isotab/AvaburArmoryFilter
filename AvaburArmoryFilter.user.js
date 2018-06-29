@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.3.1
+// @version      1.3.2
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -64,7 +64,7 @@
 
         levelInput = $("<input placeholder='Lvl' type='number'/>")
             .attr("id", "levelInput")
-            .attr("title", "Equals")
+            .attr("title", "Greater than or Equals")
             .addClass("col-md-12")
             .css({"height":"24px","text-align":"center"});
         temp = $("<div>").addClass("col-md-2").css({"padding":"0px 2px"});
