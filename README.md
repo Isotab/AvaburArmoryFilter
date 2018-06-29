@@ -13,6 +13,7 @@
 - From this newly loaded page click the "Raw" button bear the top right of the page.
 - This should load a new page with an install button.
 - That's it! Enjoy
+- Or...just click [here](https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js) if you already have TamperMonkey
 
 # Issues
 - If you come across something that doesn't seem right please report an issue through GitHub.
