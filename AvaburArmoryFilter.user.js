@@ -33,9 +33,9 @@
         var submit = $("<div>").addClass("col-md-3").css("padding","0");
 
         typeSelect = $("<select>")
-            .attr("id", "itemSelectTypeSelect")
-            .addClass("col-md-12")
-            .css({"height":"24px","text-align-last":"center","padding-left":"0px"});
+          .attr("id", "itemSelectTypeSelect")
+          .addClass("col-md-12")
+          .css({"height":"24px","text-align-last":"center","padding-left":"0px"});
         typeSelect.append("<option value=''>--Type--</option>");
         typeSelect.append("<option value='weapon'>Weapons</option>");
         typeSelect.append("<option value='armor'>Armor</option>");
@@ -163,6 +163,11 @@
             }
         });
 
+        comingSoon.on("click", function() {
+          var i = Math.floor((Math.random() * Bp.length));
+          comingSoon.text(Bp[i]);
+        });
+
     };
 
     function hideWeapons(){
@@ -205,6 +210,12 @@
         }
         if(powerInput.val() != ''){
             powerInput.val("");
+        }
+        if(containsGemsInput.checked){
+            containsGemsInput.checked = false;
+        }
+        if(itemAvailableInput.checked){
+            itemAvailableInput.checked = false;
         }
     }
 
@@ -303,11 +314,11 @@
 
     function noFilter(){
         return typeSelect.val() == '' &&
-            itemSelect.val() == '' &&
-            levelInput.val() == '' &&
-            powerInput.val() == '' &&
-            !containsGemsInput.checked &&
-            !itemAvailableInput.checked;
+          itemSelect.val() == '' &&
+          levelInput.val() == '' &&
+          powerInput.val() == '' &&
+          !containsGemsInput.checked &&
+          !itemAvailableInput.checked;
     }
 
 })(jQuery);
