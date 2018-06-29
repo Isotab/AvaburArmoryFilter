@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.2.1
+// @version      1.3.0
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -159,7 +159,7 @@
             if($.isEmptyObject(json)){
                 powerInput.val("0");
             }else{
-                powerInput.val($("#"+id).data("json").p);
+                powerInput.val(json.p);
             }
         });
 
@@ -230,7 +230,7 @@
                     case "Helmets":
                         return "helmet";
                     case "Breastplates":
-                        return "Breastplate";
+                        return "breastplate";
                     case "Gloves":
                         return "gloves";
                     case "Boots":
@@ -292,10 +292,10 @@
                     return true;
                 }
 
-                var gems = containsGemsInput.checked ? data[3] != "0" : true;
+                var gems = containsGemsInput[0].checked ? data[3] != "0" : true;
                 if(!gems) { return false; }
 
-                var available = itemAvailableInput.checked ? data[5] == "None" : true;
+                var available = itemAvailableInput[0].checked ? data[5] == "None" : true;
                 if(!available) { return false; }
 
                 var isLevel = levelInput.val() != '' ? levelInput.val() == data[1] : true;
@@ -305,7 +305,7 @@
                 if(!isPower){ return false; }
 
                 var isItem = itemSelect.val() != '' ? itemSelect.val() == data[6] : true;
-                var isType = typeSelect.val() != '' ? typeSelect.val() == 'weapon' ? itemSelectIsWeapon(data[6]) : itemSelectIsArmor(data[6]) : isType = true;
+                var isType = typeSelect.val() != '' ? typeSelect.val() == 'weapon' ? itemSelectIsWeapon(data[6]) : itemSelectIsArmor(data[6]) : true;
 
                 return isLevel && isItem && isType && gems && available;
             }
@@ -317,8 +317,8 @@
           itemSelect.val() == '' &&
           levelInput.val() == '' &&
           powerInput.val() == '' &&
-          !containsGemsInput.checked &&
-          !itemAvailableInput.checked;
+          !containsGemsInput[0].checked &&
+          !itemAvailableInput[0].checked;
     }
 
 })(jQuery);
