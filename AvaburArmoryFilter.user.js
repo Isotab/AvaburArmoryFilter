@@ -298,7 +298,7 @@
                 var available = itemAvailableInput[0].checked ? data[5] == "None" : true;
                 if(!available) { return false; }
 
-                var isLevel = levelInput.val() != '' ? parseInt(levelInput.val()) <= data[1] : true;
+                var isLevel = levelInput.val() != '' ? parseInt(levelInput.val()) <= parseInt(data[1]) : true;
                 if(!isLevel){ return false; }
 
                 var isPower = powerInput.val() != '' ? parseInt(powerInput.val()) <= parseInt(data[2]) : true ;
