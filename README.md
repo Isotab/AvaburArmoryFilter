@@ -31,3 +31,19 @@
 - Added CSS 
 - Added Power criteria
 - Surprises!
+
+# v1.3
+- Added new criteria: 
+ - Contains Gems, and Available to barrow 
+- Added new double click autofill for level and power input
+ - Double clicking on level will autofill the level input to your current level
+ - Double clicking on power will autofill the power input with (depending on type and item criteria):
+   - If no other criteria is selected then you get the power of your weapon currently equiped (if none then 0)
+   - If type of "Weapon" is selected -> power of your weapon currently equiped (if none then 0)
+   - If item is populated -> power of the item currently equiped in that slot
+    - Swords, Bows, Staves -> weapon slot
+    - Helmets -> helmet slot
+    - Breastplates -> breastplate slot
+    - Gloves -> gloves slot
+    - Boots -> boots slot
+    - Quivers, Shields -> offhand slot
