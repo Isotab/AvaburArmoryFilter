@@ -112,7 +112,7 @@
         filterDiv = createTypeSelect();
         var armoryOldFilter = $("#clanInventoryTable_filter");
         armoryOldFilter.after(filterDiv);
-        armoryOldFilter.hide();
+        //armoryOldFilter.hide();
     };
 
     function setupWatches(){
