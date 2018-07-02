@@ -7,6 +7,7 @@
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
+// @resource     https://beta.avabur.com/css/bootstrap.css
 // @grant        none
 // ==/UserScript==
 
@@ -26,11 +27,15 @@
     var itemAvailableInput;
     var comingSoon;
     var filterButton;
+    var clearFilterButton;
+    var armorySearch;
 
     function createTypeSelect(){
         var row = $("<div>").attr("id", "armoryFilterDiv").addClass("row").css("padding","0px 15px");
+        var basic = $("<div>").attr("id", "basicFilters").addClass("row");
         var criteria = $("<div>").addClass("col-md-9").css("padding","0");
         var submit = $("<div>").addClass("col-md-3").css("padding","0");
+        var advanced = $("<div>").attr("id", "advancedFilters").addClass("row");
 
         typeSelect = $("<select>")
           .attr("id", "itemSelectTypeSelect")
@@ -93,25 +98,32 @@
         criteria.append(temp);
 
         comingSoon = $("<button>:)</button>").attr("id","comingSoonButton").attr("title","Updates coming!!!").addClass("col-md-12").css("height","24px");
-        temp = $("<div>").addClass("col-md-6").css({"padding":"0px 2px"});
+        temp = $("<div>").addClass("col-md-4").css({"padding":"0px 2px"});
         temp.append(comingSoon);
         submit.append(temp);
 
-        temp = $("<div>").addClass("col-md-6").css({"padding-left":"2px","padding-right":"0px"});
-        filterButton = $("<button>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
+        clearFilterButton = $("<button>Clear</button>").attr("id","clearFilterButton").addClass("col-md-12").css("height","24px");
+        temp = $("<div>").addClass("col-md-4").css({"padding":"0px 2px"});
+        temp.append(clearFilterButton);
+        submit.append(temp);
+
+        temp = $("<div>").addClass("col-md-4").css({"padding-left":"2px","padding-right":"0px"});
+        filterButton = $("<button><span class='glyphicon glyphicon-filter'></span>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
         temp.append(filterButton);
         submit.append(temp);
 
-        row.append(criteria);
-        row.append(submit);
+        basic.append(criteria);
+        basic.append(submit);
+
+        row.append(basic);
 
         return row;
     }
 
     function insertHtml(){
         filterDiv = createTypeSelect();
-        var armoryOldFilter = $("#clanInventoryTable_filter");
-        armoryOldFilter.after(filterDiv);
+        armorySearch = $("#clanInventoryTable_filter");
+        armorySearch.after(filterDiv);
         //armoryOldFilter.hide();
     };
 
@@ -163,10 +175,17 @@
             }
         });
 
+        clearFilterButton.on("click", function(){
+            resetFilter();
+            $("#clanInventoryTable").DataTable().settings()["0"].oPreviousSearch.sSearch = "";
+            $("#clanInventoryTable").DataTable().draw();
+        });
+
         comingSoon.on("click", function() {
           var i = Math.floor((Math.random() * Bp.length));
           comingSoon.text(Bp[i]);
         });
+
 
     };
 
@@ -211,11 +230,14 @@
         if(powerInput.val() != ''){
             powerInput.val("");
         }
-        if(containsGemsInput.checked){
-            containsGemsInput.checked = false;
+        if(containsGemsInput[0].checked){
+            containsGemsInput[0].checked = false;
         }
-        if(itemAvailableInput.checked){
-            itemAvailableInput.checked = false;
+        if(itemAvailableInput[0].checked){
+            itemAvailableInput[0].checked = false;
+        }
+        if(armorySearch.find("input").val() != ''){
+            armorySearch.find("input").val('');
         }
     }
 
@@ -313,6 +335,11 @@
     );
 
     function noFilter(){
+
+        if(typeof typeSelect === 'undefined'){
+            return true;
+        }
+
         return typeSelect.val() == '' &&
           itemSelect.val() == '' &&
           levelInput.val() == '' &&
