@@ -3,11 +3,10 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.3.4
+// @version      1.3.5
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
-// @resource     https://beta.avabur.com/css/bootstrap.css
 // @grant        none
 // ==/UserScript==
 
@@ -29,18 +28,19 @@
     var filterButton;
     var clearFilterButton;
     var armorySearch;
+    var advancedHidden = true;
 
     function createTypeSelect(){
         var row = $("<div>").attr("id", "armoryFilterDiv").addClass("row").css("padding","0px 15px");
         var basic = $("<div>").attr("id", "basicFilters").addClass("row");
-        var criteria = $("<div>").addClass("col-md-9").css("padding","0");
-        var submit = $("<div>").addClass("col-md-3").css("padding","0");
-        var advanced = $("<div>").attr("id", "advancedFilters").addClass("row");
+        var criteria = $("<div>").addClass("col-md-9");
+        var submit = $("<div>").addClass("col-md-3");
+        var advanced = $("<div>").attr("id", "advancedFilters").addClass("row").css("padding-top","2px");
 
         typeSelect = $("<select>")
           .attr("id", "itemSelectTypeSelect")
           .addClass("col-md-12")
-          .css({"height":"24px","text-align-last":"center","padding-left":"0px"});
+          .css({"height":"24px","text-align-last":"center"});
         typeSelect.append("<option value=''>--Type--</option>");
         typeSelect.append("<option value='weapon'>Weapons</option>");
         typeSelect.append("<option value='armor'>Armor</option>");
@@ -108,7 +108,7 @@
         submit.append(temp);
 
         temp = $("<div>").addClass("col-md-4").css({"padding-left":"2px","padding-right":"0px"});
-        filterButton = $("<button><span class='glyphicon glyphicon-filter'></span>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
+        filterButton = $("<button>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
         temp.append(filterButton);
         submit.append(temp);
 
@@ -117,6 +117,94 @@
 
         row.append(basic);
 
+        var itemBoosts = $("<select>").attr("id","itemBoostSelect");
+        itemBoosts.append($("<option value=''>--Item Boost--</option>"));
+        itemBoosts.append($("<option value=''>Agility</option>"));
+        itemBoosts.append($("<option value=''>Brawling</option>"));
+        itemBoosts.append($("<option value=''>Celerity</option>"));
+        itemBoosts.append($("<option value=''>Chronokinesis</option>"));
+        itemBoosts.append($("<option value=''>Coordination</option>"));
+        itemBoosts.append($("<option value=''>Dueling</option>"));
+        itemBoosts.append($("<option value=''>Endurance</option>"));
+        itemBoosts.append($("<option value=''>Etching</option>"));
+        itemBoosts.append($("<option value=''>Greed</option>"));
+        itemBoosts.append($("<option value=''>Harvesting</option>"));
+        itemBoosts.append($("<option value=''>Health</option>"));
+        itemBoosts.append($("<option value=''>Luck</option>"));
+        itemBoosts.append($("<option value=''>Mastery</option>"));
+        itemBoosts.append($("<option value=''>Piercing</option>"));
+        itemBoosts.append($("<option value=''>Potency</option>"));
+        itemBoosts.append($("<option value=''>Recklessness</option>"));
+        itemBoosts.append($("<option value=''>Recovery</option>"));
+        itemBoosts.append($("<option value=''>Resilience</option>"));
+        itemBoosts.append($("<option value=''>Restoration</option>"));
+        itemBoosts.append($("<option value=''>Retaliation</option>"));
+        itemBoosts.append($("<option value=''>Retribution</option>"));
+        itemBoosts.append($("<option value=''>Smithing</option>"));
+        itemBoosts.append($("<option value=''>Sniping</option>"));
+        itemBoosts.append($("<option value=''>Sorcery</option>"));
+        itemBoosts.append($("<option value=''>Strength</option>"));
+        itemBoosts.append($("<option value=''>Swiftness</option>"));
+        itemBoosts.append($("<option value=''>Wisdom</option>"));
+        temp = $("<div>").addClass("col-md-3").css({"padding-left":"0px","padding-right":"2px"});
+        temp.append(itemBoosts);
+        advanced.append(temp);
+
+        var gemBoosts = $("<select>").attr("id","gemBoostSelect");
+        gemBoosts.append($("<option value=''>--Gem Boost--</option>"));
+        gemBoosts.append($("<option value=''>Agility</option>"));
+        gemBoosts.append($("<option value=''>Brawling</option>"));
+        gemBoosts.append($("<option value=''>Celerity</option>"));
+        gemBoosts.append($("<option value=''>Chronokinesis</option>"));
+        gemBoosts.append($("<option value=''>Coordination</option>"));
+        gemBoosts.append($("<option value=''>Dueling</option>"));
+        gemBoosts.append($("<option value=''>Endurance</option>"));
+        gemBoosts.append($("<option value=''>Etching</option>"));
+        gemBoosts.append($("<option value=''>Greed</option>"));
+        gemBoosts.append($("<option value=''>Harvesting</option>"));
+        gemBoosts.append($("<option value=''>Health</option>"));
+        gemBoosts.append($("<option value=''>Luck</option>"));
+        gemBoosts.append($("<option value=''>Mastery</option>"));
+        gemBoosts.append($("<option value=''>Piercing</option>"));
+        gemBoosts.append($("<option value=''>Potency</option>"));
+        gemBoosts.append($("<option value=''>Recklessness</option>"));
+        gemBoosts.append($("<option value=''>Recovery</option>"));
+        gemBoosts.append($("<option value=''>Resilience</option>"));
+        gemBoosts.append($("<option value=''>Restoration</option>"));
+        gemBoosts.append($("<option value=''>Retaliation</option>"));
+        gemBoosts.append($("<option value=''>Retribution</option>"));
+        gemBoosts.append($("<option value=''>Smithing</option>"));
+        gemBoosts.append($("<option value=''>Sniping</option>"));
+        gemBoosts.append($("<option value=''>Sorcery</option>"));
+        gemBoosts.append($("<option value=''>Strength</option>"));
+        gemBoosts.append($("<option value=''>Swiftness</option>"));
+        gemBoosts.append($("<option value=''>Wisdom</option>"));
+        temp = $("<div>").addClass("col-md-3").css({"padding":"0px 2px"});
+        temp.append(gemBoosts);
+        advanced.append(temp);
+
+        var levelCompare = $("<select>").attr("id","levelCompareSelect");
+        levelCompare.append($("<option value='ge'>>=</option>"));
+        levelCompare.append($("<option value='g'>></option>"));
+        levelCompare.append($("<option value='e'>=</option>"));
+        levelCompare.append($("<option value='l'><</option>"));
+        levelCompare.append($("<option value='le'><=</option>"));
+        temp = $("<div>").addClass("col-md-3").css({"padding":"0px 2px"});
+        temp.append(levelCompare);
+        advanced.append(temp);
+
+        var powerCompare = $("<select>").attr("id","powerCompareSelect");
+        powerCompare.append($("<option value='ge'>>=</option>"));
+        powerCompare.append($("<option value='g'>></option>"));
+        powerCompare.append($("<option value='e'>=</option>"));
+        powerCompare.append($("<option value='l'><</option>"));
+        powerCompare.append($("<option value='le'><=</option>"));
+        temp = $("<div>").addClass("col-md-3").css({"padding-left":"2px","padding-right":"0px"});
+        temp.append(powerCompare);
+        advanced.append(temp);
+        advanced.hide();
+
+        row.append(advanced);
         return row;
     }
 
@@ -157,6 +245,12 @@
         comingSoon.on("click", function() {
             var i = Math.floor((Math.random() * Bp.length));
             comingSoon.text(Bp[i]);
+            advancedHidden = !advancedHidden;
+            if(advancedHidden){
+              $('#advancedFilters').slideUp();
+            }else{
+              $('#advancedFilters').slideDown();
+            }
         });
 
         levelInput.dblclick(function(){
