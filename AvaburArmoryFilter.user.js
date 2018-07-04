@@ -118,7 +118,6 @@
         temp = $("<div>").addClass("col-md-4").css({"padding":"0px 2px"});
         temp.append(clearFilterButton);
         submit.append(temp);
-
         temp = $("<div>").addClass("col-md-4").css({"padding-left":"2px","padding-right":"0px"});
         filterButton = $("<button>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
         temp.append(filterButton);
@@ -318,6 +317,7 @@
             $("#clanInventoryTable").DataTable().settings()["0"].oPreviousSearch.sSearch = "";
             $("#clanInventoryTable").DataTable().draw();
         });
+
 
     };
 
