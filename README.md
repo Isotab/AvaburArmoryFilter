@@ -1,10 +1,12 @@
 # AvaburArmoryFilter
 - TamperMonkey script that enhances search filtering in the clan's armory.
+- If you have an idea that could improve upon the current functionality of this script, please let me now by making a bug reort explaining what you would like. If its possible I'll see about adding it in a later version! You can also whisper AwesomPants in Avabur (or AwesomePants in beta).
 - Thank you everyone helping with testing
   - WinterPhoenix
   - Vysn
   - Bento
   - VBMS
+  - dang
 
 
 # Installation
@@ -48,3 +50,17 @@
     - Gloves -> gloves slot
     - Boots -> boots slot
     - Quivers, Shields -> offhand slot
+
+# v1.4
+- Added the search bar back (You're welcome dang)
+- Added clear filter button which also clears the search bar
+- Added Hide/Show button for advanced search criteria
+- Added advacned search criteria
+  - Item Boost
+    - Select the boost you are searching for (checks for boost only on items)
+  - Gem Boost
+    - Select the boost you are searching for (checks for boost only on gems)
+  - Level Compare
+  - Power Compare
+    - Both compare selects allow you to change how you want to search for items by their level or power.
+    - Example: If Level input is 20 and Level compare is "<"; items with a level "less than" 20 will poplate the armory table.
