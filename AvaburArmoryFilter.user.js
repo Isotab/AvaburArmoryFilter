@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.3.6
+// @version      1.4.0
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -118,6 +118,7 @@
         temp = $("<div>").addClass("col-md-4").css({"padding":"0px 2px"});
         temp.append(clearFilterButton);
         submit.append(temp);
+
         temp = $("<div>").addClass("col-md-4").css({"padding-left":"2px","padding-right":"0px"});
         filterButton = $("<button>Filter</button>").attr("id", "armoryFilterButton").addClass("col-md-12").css("height","24px");
         temp.append(filterButton);
@@ -193,33 +194,33 @@
 
         gemBoosts = $("<select>").attr("id","gemBoostSelect");
         gemBoosts.append($("<option value=''>--Gem Boost--</option>"));
-        gemBoosts.append($("<option value='Agility'>Agility</option>"));
-        gemBoosts.append($("<option value='Unarmed Combat'>Brawling</option>"));
-        gemBoosts.append($("<option value='First Hit Chance'>Celerity</option>"));
-        gemBoosts.append($("<option value='Action Time Reduction'>Chronokinesis</option>"));
-        gemBoosts.append($("<option value='Coordination'>Coordination</option>"));
-        gemBoosts.append($("<option value='Melee Weapons'>Dueling</option>"));
-        gemBoosts.append($("<option value='Maximum Stamina'>Endurance</option>"));
-        gemBoosts.append($("<option value='Carving Boost'>Etching</option>"));
-        gemBoosts.append($("<option value='gold per kill'>Greed</option>"));
-        gemBoosts.append($("<option value='Resource Boost'>Harvesting</option>"));
-        gemBoosts.append($("<option value='Health'>Health</option>"));
-        gemBoosts.append($("<option value='Drop Boost'>Luck</option>"));
-        gemBoosts.append($("<option value='Stat Drop Boost'>Mastery</option>"));
-        gemBoosts.append($("<option value='Armor Penetration'>Piercing</option>"));
-        gemBoosts.append($("<option value='Crit Hit Chance'>Potency</option>"));
-        gemBoosts.append($("<option value='Crit Hit Damage'>Recklessness</option>"));
-        gemBoosts.append($("<option value='Healing Boost'>Recovery</option>"));
-        gemBoosts.append($("<option value='Toughness'>Resilience</option>"));
-        gemBoosts.append($("<option value='Healing'>Restoration</option>"));
-        gemBoosts.append($("<option value='Counter Attack'>Retaliation</option>"));
-        gemBoosts.append($("<option value='Counter Attack Damage'>Retribution</option>"));
-        gemBoosts.append($("<option value='Crafting Boost'>Smithing</option>"));
-        gemBoosts.append($("<option value='Ranged Weapons'>Sniping</option>"));
-        gemBoosts.append($("<option value='Magical Weapons'>Sorcery</option>"));
-        gemBoosts.append($("<option value='Strength'>Strength</option>"));
-        gemBoosts.append($("<option value='Multistrike Chance'>Swiftness</option>"));
-        gemBoosts.append($("<option value='Battle Exp Boost'>Wisdom</option>"));
+        gemBoosts.append($("<option value='of Agility'>Agility</option>"));
+        gemBoosts.append($("<option value='Brawling'>Brawling</option>"));
+        gemBoosts.append($("<option value='Celerity'>Celerity</option>"));
+        gemBoosts.append($("<option value='Chronokinesis'>Chronokinesis</option>"));
+        gemBoosts.append($("<option value='of Coordination'>Coordination</option>"));
+        gemBoosts.append($("<option value='Dueling'>Dueling</option>"));
+        gemBoosts.append($("<option value='Endurance'>Endurance</option>"));
+        gemBoosts.append($("<option value='Etching'>Etching</option>"));
+        gemBoosts.append($("<option value='Greed'>Greed</option>"));
+        gemBoosts.append($("<option value='Harvesting'>Harvesting</option>"));
+        gemBoosts.append($("<option value='of Health'>Health</option>"));
+        gemBoosts.append($("<option value='Luck'>Luck</option>"));
+        gemBoosts.append($("<option value='Mastery'>Mastery</option>"));
+        gemBoosts.append($("<option value='Piercing'>Piercing</option>"));
+        gemBoosts.append($("<option value='Potency'>Potency</option>"));
+        gemBoosts.append($("<option value='Recklessness'>Recklessness</option>"));
+        gemBoosts.append($("<option value='Recovery'>Recovery</option>"));
+        gemBoosts.append($("<option value='Resilience'>Resilience</option>"));
+        gemBoosts.append($("<option value='Restoration'>Restoration</option>"));
+        gemBoosts.append($("<option value='Retaliation'>Retaliation</option>"));
+        gemBoosts.append($("<option value='Retribution'>Retribution</option>"));
+        gemBoosts.append($("<option value='Smithing'>Smithing</option>"));
+        gemBoosts.append($("<option value='Sniping'>Sniping</option>"));
+        gemBoosts.append($("<option value='Sorcery'>Sorcery</option>"));
+        gemBoosts.append($("<option value='of Strength'>Strength</option>"));
+        gemBoosts.append($("<option value='Swiftness'>Swiftness</option>"));
+        gemBoosts.append($("<option value='Wisdom'>Wisdom</option>"));
         temp = $("<div>").addClass("col-md-3").css({"padding":"0px 2px"});
         temp.append(gemBoosts);
         advanced.append(temp);
@@ -317,7 +318,6 @@
             $("#clanInventoryTable").DataTable().settings()["0"].oPreviousSearch.sSearch = "";
             $("#clanInventoryTable").DataTable().draw();
         });
-
 
     };
 
@@ -464,10 +464,55 @@
                 var available = itemAvailableInput[0].checked ? data[5] == "None" : true;
                 if(!available) { return false; }
 
-                var isLevel = levelInput.val() != '' ? parseInt(levelInput.val()) <= parseInt(data[1]) : true;
+
+                var isLevel = levelInput.val() == '';
+                if(!isLevel){
+                  var levelCompareValue = levelCompare.val();
+                  var levelCompareValueInt = parseInt(levelInput.val());
+                  var itemLevelInt = parseInt(data[1]);
+                  switch(levelCompareValue){
+                    case "ge":
+                      isLevel = itemLevelInt >= levelCompareValueInt;
+                      break;
+                    case "g":
+                      isLevel = itemLevelInt > levelCompareValueInt;
+                      break;
+                    case "e":
+                      isLevel = itemLevelInt == levelCompareValueInt;
+                      break;
+                    case "le":
+                      isLevel = itemLevelInt <= levelCompareValueInt;
+                      break;
+                    case "l":
+                      isLevel = itemLevelInt < levelCompareValueInt;
+                      break;
+                  }
+                }
                 if(!isLevel){ return false; }
 
-                var isPower = powerInput.val() != '' ? parseInt(powerInput.val()) <= parseInt(data[2]) : true ;
+                var isPower = powerInput.val() == '';
+                if(!isPower){
+                  var powerCompareValue = powerCompare.val();
+                  var powerCompareValueInt = parseInt(powerInput.val());
+                  var itemPowerInt = parseInt(data[2]);
+                  switch(powerCompareValue){
+                    case "ge":
+                      isPower = itemPowerInt >= powerCompareValueInt;
+                      break;
+                    case "g":
+                      isPower = itemPowerInt > powerCompareValueInt;
+                      break;
+                    case "e":
+                      isPower = itemPowerInt == powerCompareValueInt;
+                      break;
+                    case "le":
+                      isPower = itemPowerInt <= powerCompareValueInt;
+                      break;
+                    case "l":
+                      isPower = itemPowerInt < powerCompareValueInt;
+                      break;
+                  }
+                }
                 if(!isPower){ return false; }
 
                 var isItem = itemSelect.val() != '' ? itemSelect.val() == data[6] : true;
@@ -475,29 +520,44 @@
 
                 var hasItemBoost = false;
                 var hasGemBoost = false;
-                var checkForGems = gemBoosts.val() != '';
-                var checkForItems = itemBoosts.val() != '';
+                var checkForGemsBoosts = gemBoosts.val() != '';
+                if(checkForGemsBoosts && data[3] == '0'){
+                  return false;
+                }
+                var checkForItemsBoosts = itemBoosts.val() != '';
                 var boosts = data[4].split(",");
-                for(var i = 0; i < boosts.length; i++){
-                  if(!hasItemBoost && boosts[i].includes(itemBoosts.val())){
-                   hasItemBoost = true;
-                  }
-                  if(!hasGemBoost && boosts[i].includes(gemBoosts.val())){
-                   hasGemBoost = true;
+                if(checkForItemsBoosts || checkForGemsBoosts){
+                  for(var i = 0; i < boosts.length; i++){
+                    if(!hasItemBoost && i < (boosts.length - parseInt(data[3])) - 1 && boosts[i].includes(itemBoosts.val())){
+                     hasItemBoost = true;
+                    }
+                    if(!hasGemBoost && i > (boosts.length - parseInt(data[3])) - 1 && boosts[i].includes(gemBoosts.val())){
+                     hasGemBoost = true;
+                    }
                   }
                 }
-                if(checkForGems){
+
+                if(checkForGemsBoosts){
                   if(!hasGemBoost){
                     return false;
                   }
                 }
-                if(checkForItems){
+                if(checkForItemsBoosts){
                   if(!hasItemBoost){
                     return false;
                   }
                 }
 
-                return isLevel && isItem && isType && gems && available && hasItemBoost && hasGemBoost;
+                if(checkForItemsBoosts && checkForGemsBoosts){
+                  return isLevel && isItem && isType && gems && available && hasItemBoost && hasGemBoost;
+                }else if(checkForItemsBoosts){
+                  return isLevel && isItem && isType && gems && available && hasItemBoost;
+                }else if(checkForGemsBoosts){
+                  return isLevel && isItem && isType && gems && available && hasGemBoost;
+                }else{
+                  return isLevel && isItem && isType && gems && available;
+                }
+
             }
         }
     );
