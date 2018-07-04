@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.4.0
+// @version      1.4.1
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -97,7 +97,7 @@
 
         itemAvailableInput = $("<input type='checkbox' id='itemAvailableInput' style='vertical-align: middle;'/>")
         temp = $("<div>").addClass("col-md-2").css("padding","0px 2px");
-        temp.append($("<label for='itemAvailableInput'>Can Barrow:</label>"));
+        temp.append($("<label for='itemAvailableInput'>Can Borrow:</label>"));
         temp.append(itemAvailableInput);
         criteria.append(temp);
 
