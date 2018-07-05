@@ -22,7 +22,7 @@
     var itemSelect;
     var levelInput;
     var powerInput;
-    var containsGemsInput;
+    var containsGemsSelect;
     var itemAvailableInput;
     var advancedFilter;
     var filterButton;
@@ -76,7 +76,7 @@
             .attr("title", "Greater than or Equals")
             .addClass("col-md-12")
             .css({"height":"24px","text-align":"center"});
-        temp = $("<div>").addClass("col-md-2").css({"padding":"0px 2px"});
+        temp = $("<div>").addClass("col-md-1").css({"padding":"0px 2px"});
         temp.append(levelInput);
         criteria.append(temp);
 
@@ -89,10 +89,13 @@
         temp.append(powerInput);
         criteria.append(temp);
 
-        containsGemsInput = $("<input type='checkbox' id='containsGemsInput' style='vertical-align: middle;'/>")
-        temp = $("<div>").addClass("col-md-2").css("padding","0px 2px");
-        temp.append($("<label for='containsGemsInput'>Has Gems:</label>"));
-        temp.append(containsGemsInput);
+        containsGemsSelect = $("<select id='containsGemsSelect' style='vertical-align: middle;'/></label>")
+          .append($("<option value=''>Don't Care</option>"))
+          .append($("<option value='1'>Yes</option>"))
+          .append($("<option value='0'>No</option>"));
+        temp = $("<div>").addClass("col-md-3").css("padding","0px 2px");
+        temp.append($("<label for='containsGemsSelect'>Has Gems:</label>"));
+        temp.append(containsGemsSelect);
         criteria.append(temp);
 
         itemAvailableInput = $("<input type='checkbox' id='itemAvailableInput' style='vertical-align: middle;'/>")
@@ -362,8 +365,8 @@
         if(powerInput.val() != ''){
             powerInput.val("");
         }
-        if(containsGemsInput[0].checked){
-            containsGemsInput[0].checked = false;
+        if(containsGemsSelect.val() != ''){
+            containsGemsSelect.val("");
         }
         if(itemAvailableInput[0].checked){
             itemAvailableInput[0].checked = false;
@@ -458,7 +461,7 @@
                     return true;
                 }
 
-                var gems = containsGemsInput[0].checked ? data[3] != "0" : true;
+                var gems = containsGemsSelect.val() == '' ? true : parseInt(containsGemsSelect.val()) == 1 ? data[3] != '0' : data[3] == '0';
                 if(!gems) { return false; }
 
                 var available = itemAvailableInput[0].checked ? data[5] == "None" : true;
@@ -572,7 +575,7 @@
           itemSelect.val() == '' &&
           levelInput.val() == '' &&
           powerInput.val() == '' &&
-          !containsGemsInput[0].checked &&
+          containsGemsSelect.val() == '' &&
           !itemAvailableInput[0].checked &&
           itemBoosts.val() == '' &&
           gemBoosts.val() == '';
