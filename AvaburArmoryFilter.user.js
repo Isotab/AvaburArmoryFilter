@@ -83,8 +83,6 @@
         paddedDiv.append(itemSelect);
         criteria.append(paddedDiv);
 
-
-
         levelInput = $("<input placeholder='Lvl' type='number'/>")
             .attr("id", "levelInput")
             .attr("title", "Greater than or Equals")
@@ -141,6 +139,7 @@
         paddedDiv.append(filterButton);
         submit.append(paddedDiv);
     }
+
     function addAdvancedCriteria(filterDiv){
         var advanced = $("<div>").attr("id", "advancedFilters").addClass("row").css("padding-top","2px");
         filterDiv.append(advanced)
@@ -264,7 +263,6 @@
         advanced.hide();
     }
 
-
     function setupWatches(){
         filterButton.on("click", function(){
             $("#clanInventoryTable").DataTable().draw();
@@ -322,7 +320,6 @@
             $("#clanInventoryTable").DataTable().settings()["0"].oPreviousSearch.sSearch = "";
             $("#clanInventoryTable").DataTable().draw();
         });
-
     };
 
     function hideWeapons(){
@@ -422,7 +419,6 @@
         }
 
         return "weapon";
-
     }
 
     function itemSelectIsWeapon(itemSelectType){
@@ -441,7 +437,6 @@
     $(window).on("load", function(){
         init();
     });
-
 
     $.fn.dataTable.ext.search.push(
         function(settings, data, dataIndex){
@@ -522,13 +517,11 @@
                 }else{
                   return isLevel && isItem && isType && gems && available;
                 }
-
             }
         }
     );
 
     function noFilter(){
-
         if(typeof typeSelect === 'undefined'){
             return true;
         }
