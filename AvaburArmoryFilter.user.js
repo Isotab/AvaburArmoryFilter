@@ -100,7 +100,7 @@
 
         itemAvailableInput = $("<input type='checkbox' id='itemAvailableInput' style='vertical-align: middle;'/>")
         temp = $("<div>").addClass("col-md-2").css("padding","0px 2px");
-        temp.append($("<label for='itemAvailableInput'>Can Barrow:</label>"));
+        temp.append($("<label for='itemAvailableInput'>Can Borrow:</label>"));
         temp.append(itemAvailableInput);
         criteria.append(temp);
 
