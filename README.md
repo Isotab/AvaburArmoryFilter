@@ -65,3 +65,10 @@
   - Power Compare
     - Both compare selects allow you to change how you want to search for items by their level or power.
     - Example: If Level input is 20 and Level compare is "<"; items with a level "less than" 20 will poplate the armory table.
+    
+ ## v1.4.2
+ - Has Gem criteria now has three options
+   - Don't Care
+   - Yes
+   - No
+ - The filter criteria is not longer reset when closing the armory modal
