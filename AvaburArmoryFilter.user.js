@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.4.1
+// @version      1.4.2
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -284,10 +284,10 @@
             }
         });
 
-        $(".closeModal, #modalBackground").on("click", function(e){
-            e.preventDefault();
-            resetFilter();
-        });
+        // $(".closeModal, #modalBackground").on("click", function(e){
+        //     e.preventDefault();
+        //     resetFilter();
+        // });
 
         advancedFilter.on("click", function() {
             advancedHidden = !advancedHidden;
