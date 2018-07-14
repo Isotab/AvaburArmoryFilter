@@ -462,7 +462,6 @@
                 var available = itemAvailableInput[0].checked ? data[5] == "None" : true;
                 if(!available) { return false; }
 
-
                 var isLevel = levelInput.val() == '';
                 if(!isLevel){
                   isLevel = checkLevelOrPower(levelInput.val(), levelCompare.val(), data[1]);
