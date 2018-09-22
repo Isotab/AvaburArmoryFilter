@@ -3,7 +3,7 @@
 // @namespace    njh.RoA
 // @downloadURL  https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
 // @updateURL    https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js
-// @version      1.4.3
+// @version      1.4.4
 // @description  Enhanced Filter for Armory in Avabur
 // @author       AwesomePants (theCanadianHat)
 // @match        https://*.avabur.com/game*
@@ -240,9 +240,9 @@
         advanced.append(paddedDiv);
 
         levelCompare = $("<select>").attr("id","levelCompareSelect");
+        levelCompare.append($("<option value='e'>=</option>"));
         levelCompare.append($("<option value='ge'>>=</option>"));
         levelCompare.append($("<option value='g'>></option>"));
-        levelCompare.append($("<option value='e'>=</option>"));
         levelCompare.append($("<option value='l'><</option>"));
         levelCompare.append($("<option value='le'><=</option>"));
         paddedDiv = $("<div>").addClass("col-md-3").css({"padding":"0px 2px"});
@@ -251,9 +251,9 @@
         advanced.append(paddedDiv);
 
         powerCompare = $("<select>").attr("id","powerCompareSelect");
+        powerCompare.append($("<option value='e'>=</option>"));
         powerCompare.append($("<option value='ge'>>=</option>"));
         powerCompare.append($("<option value='g'>></option>"));
-        powerCompare.append($("<option value='e'>=</option>"));
         powerCompare.append($("<option value='l'><</option>"));
         powerCompare.append($("<option value='le'><=</option>"));
         paddedDiv = $("<div>").addClass("col-md-3").css({"padding-left":"2px","padding-right":"0px"});
