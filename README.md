@@ -18,8 +18,9 @@
 - That's it! Enjoy
 - Or...just click [here](https://github.com/theCanadianHat/AvaburArmoryFilter/raw/master/AvaburArmoryFilter.user.js) if you already have TamperMonkey
 
-# Issues
+# Issues and Suggestions
 - If you come across something that doesn't seem right please report an issue through GitHub.
+- If you have any suggestions please add issue and I'll see what I can do.
 
 # v1.0
 - Added new filters in the Clan's Armory. 
